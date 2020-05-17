@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import com.edney.cursomongodb.dto.DTOAutor;
+import com.edney.cursomongodb.dto.DTOComentario;
 import com.edney.cursomongodb.entidades.Post;
 import com.edney.cursomongodb.entidades.Usuario;
 import com.edney.cursomongodb.respositorios.RepositorioPost;
@@ -40,6 +41,13 @@ public class Instanciar implements CommandLineRunner{
 		
 		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo Abraços", new DTOAutor(maria));
 		Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new DTOAutor(maria));
+		
+		DTOComentario c1 = new DTOComentario("Boa viagem mano!", sdf.parse("21/03/2018"), new DTOAutor(alex));
+		DTOComentario c2 = new DTOComentario("Aproveite", sdf.parse("22/03/2018"), new DTOAutor(bob));
+		DTOComentario c3 = new DTOComentario("Tenha um ótimo dia!", sdf.parse("23/03/2018"), new DTOAutor(alex));
+		
+		post1.getComentarios().addAll(Arrays.asList(c1, c2));
+		post2.getComentarios().addAll(Arrays.asList(c3));
 		
 		repositorioPost.saveAll(Arrays.asList(post1, post2));
 		

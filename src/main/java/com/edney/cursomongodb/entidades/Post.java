@@ -1,12 +1,15 @@
 package com.edney.cursomongodb.entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.edney.cursomongodb.dto.DTOAutor;
+import com.edney.cursomongodb.dto.DTOComentario;
 
 @Document
 public class Post implements Serializable{
@@ -20,6 +23,8 @@ public class Post implements Serializable{
 	private String corpo;
 
 	private DTOAutor autor;
+	
+	private List<DTOComentario> comentarios = new ArrayList<>();
 	
 	public Post() {
 	}
@@ -71,6 +76,10 @@ public class Post implements Serializable{
 
 	public void setAutor(DTOAutor autor) {
 		this.autor = autor;
+	}
+
+	public List<DTOComentario> getComentarios() {
+		return comentarios;
 	}
 
 	@Override

@@ -43,7 +43,7 @@ public class Instanciar implements CommandLineRunner{
 		
 		repositorioPost.saveAll(Arrays.asList(post1, post2));
 		
-		maria.getPost().addAll(Arrays.asList(post1, post2));
+		maria.getPosts().addAll(Arrays.asList(post1, post2));
 		repositorioUsuario.save(maria);
 		
 	}

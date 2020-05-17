@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.edney.cursomongodb.dto.DTOUsuario;
+import com.edney.cursomongodb.entidades.Post;
 import com.edney.cursomongodb.entidades.Usuario;
 import com.edney.cursomongodb.servicos.ServicoUsuario;
 
@@ -61,5 +62,11 @@ public class RecursoUsuario {
 		obj.setId(id);
 		obj = servico.atualizar(obj);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping(value = "/{id}/posts")
+	public ResponseEntity<List<Post>> buscarPost(@PathVariable String id) {
+		Usuario obj = servico.buscarPeloId(id);
+		return ResponseEntity.ok().body(obj.getPosts());
 	}
 }

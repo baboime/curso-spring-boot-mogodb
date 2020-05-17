@@ -55,7 +55,7 @@ public class Usuario implements Serializable{
 		this.email = email;
 	}
 
-	public List<Post> getPost() {
+	public List<Post> getPosts() {
 		return posts;
 	}
 

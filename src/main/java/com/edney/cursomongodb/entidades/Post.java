@@ -1,34 +1,34 @@
 package com.edney.cursomongodb.entidades;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "usuario")
-public class Usuario implements Serializable{
-	
+@Document
+public class Post implements Serializable{
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String id;
-	private String nome;
-	private String email;
+	private Date data;
+	private String titulo;
+	private String corpo;
+
+	private Usuario autor;
 	
-//	private List<Post> post = new ArrayList<>();
-	
-	public Usuario() {
+	public Post() {
 	}
 
-	public Usuario(String id, String nome, String email) {
-//	public Usuario(String id, String nome, String email, List<Post> post) {
+	public Post(String id, Date data, String titulo, String corpo, Usuario autor) {
 		super();
 		this.id = id;
-		this.nome = nome;
-		this.email = email;
-//		this.post = post;
+		this.data = data;
+		this.titulo = titulo;
+		this.corpo = corpo;
+		this.autor = autor;
 	}
 
 	public String getId() {
@@ -39,25 +39,37 @@ public class Usuario implements Serializable{
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public Date getData() {
+		return data;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setData(Date data) {
+		this.data = data;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
-//	public List<Post> getPost() {
-//		return post;
-//	}
+	public String getCorpo() {
+		return corpo;
+	}
+
+	public void setCorpo(String corpo) {
+		this.corpo = corpo;
+	}
+
+	public Usuario getAutor() {
+		return autor;
+	}
+
+	public void setAutor(Usuario autor) {
+		this.autor = autor;
+	}
 
 	@Override
 	public int hashCode() {
@@ -75,7 +87,7 @@ public class Usuario implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
+		Post other = (Post) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

@@ -5,11 +5,13 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edney.cursomongodb.dto.UsuarioDTO;
+import com.edney.cursomongodb.dto.DTOUsuario;
 import com.edney.cursomongodb.entidades.Usuario;
 import com.edney.cursomongodb.servicos.ServicoUsuario;
 
@@ -21,10 +23,15 @@ public class RecursoUsuario {
 	private ServicoUsuario servico;
 		
 	@RequestMapping(method = RequestMethod.GET) // pode ser utilizado o '@GetMapping'
-	public ResponseEntity<List<UsuarioDTO>> buscarTodos() {
+	public ResponseEntity<List<DTOUsuario>> buscarTodos() {
 		List<Usuario> lista = servico.buscarTodos();
-		List<UsuarioDTO> listaDto = lista.stream().map(x -> new UsuarioDTO(x)).collect(Collectors.toList());
+		List<DTOUsuario> listaDto = lista.stream().map(x -> new DTOUsuario(x)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listaDto);
 	}
- 
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<DTOUsuario> buscarPorId(@PathVariable String id) {
+		Usuario obj = servico.buscarPeloId(id);
+		return ResponseEntity.ok().body(new DTOUsuario(obj));
+	}
 }

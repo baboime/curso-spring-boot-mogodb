@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.edney.cursomongodb.entidades.Usuario;
 
-public class UsuarioDTO implements Serializable{
+public class DTOUsuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -12,10 +12,10 @@ public class UsuarioDTO implements Serializable{
 	private String nome;
 	private String email;
 	
-	public UsuarioDTO() {
+	public DTOUsuario() {
 	}
 	
-	public UsuarioDTO(Usuario obj) {
+	public DTOUsuario(Usuario obj) {
 		id = obj.getId();
 		nome = obj.getNome();
 		email = obj.getEmail();

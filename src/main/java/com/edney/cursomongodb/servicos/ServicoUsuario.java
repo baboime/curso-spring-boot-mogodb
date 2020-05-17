@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edney.cursomongodb.dto.DTOUsuario;
 import com.edney.cursomongodb.entidades.Usuario;
 import com.edney.cursomongodb.respositorios.RepositorioUsuario;
 import com.edney.cursomongodb.servicos.excecoes.ExcecaoObjetoNaoEncontrado;
@@ -23,5 +24,13 @@ public class ServicoUsuario {
 	public Usuario buscarPeloId(String id) {
 		Optional<Usuario> obj = repositorio.findById(id);
 		return obj.orElseThrow(() -> new ExcecaoObjetoNaoEncontrado("Objeto não encotrado"));
+	}
+	
+	public Usuario incluir(Usuario obj) {
+		return repositorio.insert(obj);
+	}
+	
+	public Usuario aPartirDoDTO (DTOUsuario objDTO) {
+		return new Usuario(objDTO.getId(), objDTO.getNome(), objDTO.getEmail());
 	}
 }

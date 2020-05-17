@@ -1,5 +1,6 @@
 package com.edney.cursomongodb.servicos;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,5 +25,10 @@ public class ServicoPost {
 	public List<Post> buscarPeloTitulo(String texto) {
 //		return repositorio.findByTituloContainingIgnoreCase(texto);
 		return repositorio.buscaPorTitulo(texto);
+	}
+	
+	public List<Post> buscaCompleta (String texto, Date dataInicio, Date dataFim) {
+		dataFim = new Date(dataFim.getTime() + 24 * 60 * 60 * 1000);
+		return repositorio.buscaCompleta(texto, dataInicio, dataFim);
 	}
 }

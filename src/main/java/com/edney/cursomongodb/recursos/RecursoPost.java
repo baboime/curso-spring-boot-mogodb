@@ -1,5 +1,6 @@
 package com.edney.cursomongodb.recursos;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,18 @@ public class RecursoPost {
 	public ResponseEntity<List<Post>> buscarPorTitulo(@RequestParam(value = "texto", defaultValue = "") String texto) {
 		texto = URL.parametroDeDecodificacao(texto);
 		List<Post> lista = servico.buscarPeloTitulo(texto);
+		return ResponseEntity.ok().body(lista);
+	}
+	
+	@GetMapping(value = "/buscacompleta")
+	public ResponseEntity<List<Post>> buscaCompleta(
+			@RequestParam(value = "texto", defaultValue = "") String texto,
+			@RequestParam(value = "dataInicio", defaultValue = "") String dataInicio,
+			@RequestParam(value = "dataFim", defaultValue = "") String dataFim) {
+		texto = URL.parametroDeDecodificacao(texto);
+		Date inicio = URL.converterData(dataInicio, new Date(0L));
+		Date fim = URL.converterData(dataInicio, new Date());
+		List<Post> lista = servico.buscaCompleta(texto, inicio, fim);
 		return ResponseEntity.ok().body(lista);
 	}
 }

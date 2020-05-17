@@ -1,5 +1,6 @@
 package com.edney.cursomongodb.servicos;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,9 @@ public class ServicoPost {
 	public Post buscarPeloId(String id) {
 		Optional<Post> obj = repositorio.findById(id);
 		return obj.orElseThrow(() -> new ExcecaoObjetoNaoEncontrado("Objeto não encotrado"));
+	}
+	
+	public List<Post> buscarPeloTitulo(String texto) {
+		return repositorio.findByTituloContainingIgnoreCase(texto);
 	}
 }
